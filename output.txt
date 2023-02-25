@@ -1,0 +1,7 @@
+Generation: 51,764 usec
+Hash table base: 1,449,545 usec
+  - 0 missing
+Hash table v1: 4,588,561 usec
+  - 0 missing
+Hash table v2: 521,157 usec
+  - 0 missing
