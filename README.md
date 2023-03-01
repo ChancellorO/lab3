@@ -82,6 +82,7 @@ Then to handle the locking feature, within the function *hash_table_v1_add_entry
 which ensures that the critical section isn't accessed unless the thread has the lock.
 
 *Why the strategy is correct*
+
 This approach works because the critical section is argueably the entire function *hash_table_v1_add_entry* definition as it allows multiple threads have access to the shared data segment. Therefore, creating a lock on this part of the implementation disables this type of undefined behavior and hence, O missing hash table entries from occurring.
 
 To avoid unnecessary memory leaks, I added the following line in the function *hash_table_v1_destroy*:
@@ -95,6 +96,7 @@ which ensures the mutex created earlier is destroyed appropriately.
 ### Performance
 
 *Test Case that completes in 1-2 seconds*
+
 Consider the test case when the flags are `-t 2` and `-s 240000`:
 
 ```sh
@@ -164,6 +166,7 @@ Then within  *hash_table_v2_add_entry*, I create a lock which locks that specifi
 Therefore, multiple threads can work on different buckets, given that they have the lock for the corresponding list.
 
 Finally to avoid memory leaks, I implemented a call to the `pthread_mutex_destroy()` function to loop through and destroy the mutex for each hash table entry.
+
 *Why strategy is correct*
 
 This is the correct strategy to implement as it doesn't monopolize the critical section just for one hash table entry, but instead locks the corresponding hash table entry list and enables other threads to work on other hash table entries.
