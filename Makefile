@@ -6,14 +6,6 @@ else
 	LDFLAGS = -lrt -pthread -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now
 endif
 
-# ADDED PORTION
-TSAN = -fsanitize=thread -fsanitize=undefined -g3 -Og
-ASAN = -fsanitize=address -fsanitize=undefined -g3 -Og
-SANITIZE = $(TSAN)
-CFLAGS += $(SANITIZE)
-LDFLAGS += $(SANITIZE)
-# END 
-
 OBJS = \
   hash-table-common.o \
   hash-table-base.o \

@@ -33,7 +33,9 @@ struct hash_table_v2 *hash_table_v2_create()
 		int init_res = pthread_mutex_init(&entry->mutex, NULL);
 		if (init_res != 0)
 		  {
-		  }}
+		    
+		    exit(init_res);
+		  }
 		
 	}
 	return hash_table;
@@ -106,6 +108,7 @@ void hash_table_v2_add_entry(struct hash_table_v2 *hash_table,
 	  {
 	    exit(unlockres);
 	  }
+
 }
 
 uint32_t hash_table_v2_get_value(struct hash_table_v2 *hash_table,
@@ -122,11 +125,11 @@ void hash_table_v2_destroy(struct hash_table_v2 *hash_table)
 {
 	for (size_t i = 0; i < HASH_TABLE_CAPACITY; ++i) {
 		struct hash_table_entry *entry = &hash_table->entries[i];
-		/* int destroyres = pthread_mutex_destroy(&entry->mutex); */
-		/* if (destroyres != 0) */
-		/*   { */
-		/*     exit(destroyres); */
-		/*   } */
+		int destroyres = pthread_mutex_destroy(&entry->mutex);
+		if (destroyres != 0)
+		  {
+		    exit(destroyres);
+		  }
 		struct list_head *list_head = &entry->list_head;
 		struct list_entry *list_entry = NULL;
 		while (!SLIST_EMPTY(list_head)) {
