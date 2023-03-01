@@ -144,7 +144,7 @@ The main difference between low threads and high threads for the 1st implementat
 
 For the *Hash table v2* we were tasked with not only addressing the missing hash table entries, but also improving performance. As a result, a single mutex will not suffice.
 
-We must result to multiple mutex in order to incentivize parallelism of other threads, while some threads block their current list.
+We must result to multiple mutex in order to increase parallelism while some threads block their current list.
 
 Hence the approach I took was to create a mutex for each list within the hashtable, since the critical section occurs when multiple threads access the same *list*. Hence, creating a lock for that list would prevent other threads from accessing that list, but enable other threads to run on different lists concurrently.
 
