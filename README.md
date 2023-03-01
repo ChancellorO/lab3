@@ -28,7 +28,7 @@ To run the program, simply type into the command line:
 ./hash-table-tester -t 4 -s 50000
 ```
 
-This line executes the executable file created from the **MAKE** Section and changes
+This line executes the executable file created from the **BUILDING** Section and changes
 default values given 2 flags:
 
 `-s` changes how many hash table entries to add per thread (default 25,000)
